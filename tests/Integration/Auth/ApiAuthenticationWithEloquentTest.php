@@ -37,7 +37,8 @@ class ApiAuthenticationWithEloquentTest extends TestCase
 
         $this->expectException(QueryException::class);
 
-        $this->expectExceptionMessage("SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES) (SQL: select * from `users` where `api_token` = whatever limit 1)");
+        $this->expectExceptionMessage("SQLSTATE[HY000] [1045] Access denied for user 'root'@");
+        $this->expectExceptionMessage("(using password: YES) (SQL: select * from `users` where `api_token` = whatever limit 1)");
 
         $this->withoutExceptionHandling()->get('/auth', ['Authorization' => 'Bearer whatever']);
     }
